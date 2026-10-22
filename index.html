@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yvonne Onuorah | Senior Software Developer & Frontend Architect</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        indigoDark: '#0b0f19',
+                        carbon: '#111827',
+                        slateCard: '#1e293b',
+                        electricCyan: '#06b6d4',
+                        emeraldAccent: '#10b981',
+                        codeBg: '#080c14'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-panel-hover:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+        }
+
+        .glow-emerald {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+
+        /* Syntax Highlighting Colors */
+        .token-keyword { color: #f472b6; font-weight: 600; }
+        .token-func { color: #38bdf8; }
+        .token-string { color: #34d399; }
+        .token-comment { color: #6b7280; font-style: italic; }
+        .token-type { color: #fbbf24; }
+        .token-var { color: #e879f9; }
+    </style>
+</head>
+<body class="antialiased selection:bg-electricCyan selection:text-carbon">
+
+    <!-- TOP NAV -->
+    <nav class="fixed top-0 left-0 w-full z-40 glass-panel border-b border-slate-800/80 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-electricCyan to-emeraldAccent flex items-center justify-center text-indigoDark font-extrabold font-mono text-base shadow-lg shadow-electricCyan/20">
+                YO
+            </div>
+            <div>
+                <span class="font-bold text-white text-base tracking-tight block">Yvonne Onuorah</span>
+                <span class="text-[11px] font-mono text-electricCyan block">Sr. Software Developer & Frontend Architect</span>
+            </div>
+        </div>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center space-x-6 text-xs font-mono">
+            <a href="#about" class="text-slate-300 hover:text-electricCyan transition-colors">/about</a>
+            <a href="#sandbox" class="text-slate-300 hover:text-electricCyan transition-colors flex items-center gap-1">
+                <span>/code-sandbox</span>
+                <span class="bg-electricCyan/20 text-electricCyan text-[9px] px-1.5 py-0.2 rounded border border-electricCyan/30">Live</span>
+            </a>
+            <a href="#projects" class="text-slate-300 hover:text-electricCyan transition-colors">/projects</a>
+            <a href="#skills" class="text-slate-300 hover:text-electricCyan transition-colors">/stack</a>
+            <a href="#experience" class="text-slate-300 hover:text-electricCyan transition-colors">/experience</a>
+            <a href="#certifications" class="text-slate-300 hover:text-electricCyan transition-colors">/certs</a>
+            <button onclick="openContactModal()" class="bg-gradient-to-r from-electricCyan to-emeraldAccent text-indigoDark font-extrabold px-4 py-2 rounded-lg transition-all hover:opacity-90 shadow-md shadow-electricCyan/20 font-sans">
+                <i class="fa-solid fa-paper-plane mr-1.5"></i> Contact Me
+            </button>
+        </div>
+
+        <!-- Mobile Menu Btn -->
+        <button onclick="toggleMobileNav()" class="md:hidden text-slate-300 hover:text-white p-2">
+            <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobileNav" class="hidden fixed top-16 left-0 w-full z-30 glass-panel border-b border-slate-800 p-6 flex-col space-y-4 text-sm font-mono md:hidden">
+        <a href="#about" onclick="toggleMobileNav()" class="text-slate-300 hover:text-electricCyan">/about</a>
+        <a href="#sandbox" onclick="toggleMobileNav()" class="text-slate-300 hover:text-electricCyan">/code-sandbox</a>
+        <a href="#projects" onclick="toggleMobileNav()" class="text-slate-300 hover:text-electricCyan">/projects</a>
+        <a href="#skills" onclick="toggleMobileNav()" class="text-slate-300 hover:text-electricCyan">/stack</a>
+        <a href="#experience" onclick="toggleMobileNav()" class="text-slate-300 hover:text-electricCyan">/experience</a>
+        <a href="#certifications" onclick="toggleMobileNav()" class="text-slate-300 hover:text-electricCyan">/certs</a>
+        <button onclick="toggleMobileNav(); openContactModal();" class="w-full bg-electricCyan text-indigoDark font-bold py-2.5 rounded-lg">
+            Contact Me
+        </button>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="about" class="pt-32 pb-20 px-4 sm:px-8 max-w-7xl mx-auto relative overflow-hidden">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+            
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Status Tag -->
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emeraldAccent/30 bg-emeraldAccent/10 text-emeraldAccent text-xs font-mono">
+                    <span class="w-2 h-2 rounded-full bg-emeraldAccent animate-ping"></span>
+                    <span>Available for Sr. Developer & Lead Frontend Roles</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                    Engineering Robust, <span class="bg-gradient-to-r from-electricCyan via-emeraldAccent to-teal-300 bg-clip-text text-transparent">High-Performance Web Applications</span> & Cloud Solutions.
+                </h1>
+
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-sans">
+                    I am <strong class="text-white">Yvonne Onuorah</strong>, a Senior Software Developer & Technical Lead based in Lagos, Nigeria. Specializing in modern JavaScript/TypeScript, React.js, Next.js architecture, state management, and serverless cloud workflows.
+                </p>
+
+                <!-- AWS Cert Spotlight Banner in Hero -->
+                <div class="glass-panel p-4 rounded-xl border-amber-500/40 bg-gradient-to-r from-amber-500/10 via-slateCard/90 to-carbon flex items-center space-x-4 shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 shrink-0 text-xl">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-[10px] font-mono uppercase bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/30">PASSED EXAM</span>
+                            <span class="text-xs font-mono text-slate-400">AWS Certification</span>
+                        </div>
+                        <h3 class="font-bold text-white text-sm sm:text-base mt-0.5">AWS Certified Solutions Architect – Associate (SAA-C03)</h3>
+                        <p class="text-slate-400 text-xs">Architecting resilient, cost-optimized, and highly available web infrastructure on AWS.</p>
+                    </div>
+                </div>
+
+                <!-- CTAs -->
+                <div class="flex flex-wrap gap-4 pt-2 font-mono text-xs">
+                    <a href="#projects" class="bg-electricCyan text-indigoDark font-extrabold px-6 py-3.5 rounded-xl hover:bg-cyan-400 transition-all flex items-center gap-2 shadow-lg shadow-electricCyan/20">
+                        <i class="fa-solid fa-code"></i> View Flagship Projects
+                    </a>
+                    <a href="#sandbox" class="glass-panel text-white font-semibold px-6 py-3.5 rounded-xl hover:border-electricCyan transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-terminal text-electricCyan"></i> Live Code Sandbox
+                    </a>
+                    <button onclick="openContactModal()" class="glass-panel text-slate-300 font-semibold px-5 py-3.5 rounded-xl hover:text-white transition-all">
+                        <i class="fa-solid fa-envelope text-emeraldAccent"></i> Contact
+                    </button>
+                </div>
+            </div>
+
+            <!-- Terminal Card Graphic -->
+            <div class="lg:col-span-5">
+                <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden shadow-2xl font-mono text-xs">
+                    <div class="bg-carbon px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                        </div>
+                        <span class="text-slate-400 text-[11px]">yvonne_profile.ts</span>
+                    </div>
+
+                    <div class="p-6 space-y-4 bg-codeBg text-slate-300">
+                        <div>
+                            <span class="token-keyword">const</span> <span class="token-var">developer</span> = {
+                        </div>
+                        <div class="pl-4">
+                            <span class="token-var">name</span>: <span class="token-string">'Yvonne Onuorah'</span>,<br>
+                            <span class="token-var">role</span>: <span class="token-string">'Technical Lead & Sr. Developer'</span>,<br>
+                            <span class="token-var">company</span>: <span class="token-string">'CecureIntel'</span>,<br>
+                            <span class="token-var">location</span>: <span class="token-string">'Lagos, Nigeria 🇳🇬'</span>,<br>
+                            <span class="token-var">awsCertified</span>: [<span class="token-string">'SAA-C03'</span>, <span class="token-string">'CLF-C01'</span>],<br>
+                            <span class="token-var">stack</span>: [<span class="token-string">'React'</span>, <span class="token-string">'Next.js'</span>, <span class="token-string">'TypeScript'</span>, <span class="token-string">'Node.js'</span>, <span class="token-string">'AWS'</span>],<br>
+                            <span class="token-var">availability</span>: <span class="token-type">true</span>
+                        </div>
+                        <div>};</div>
+
+                        <div class="pt-2 border-t border-slate-800/80">
+                            <span class="token-comment">// Key Metrics</span><br>
+                            <span class="token-keyword">function</span> <span class="token-func">getImpact</span>() {<br>
+                            &nbsp;&nbsp;<span class="token-keyword">return</span> <span class="token-string">"Led UI Architecture across 8+ Enterprise Platforms"</span>;<br>
+                            }
+                        </div>
+
+                        <div class="pt-2 flex items-center space-x-2 text-emeraldAccent">
+                            <i class="fa-solid fa-circle-check text-xs"></i>
+                            <span class="text-[11px]">AWS Certified Solutions Architect – Associate Validated</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LIVE CLEAN CODE SANDBOX COMPONENT -->
+    <section id="sandbox" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-electricCyan/30 bg-electricCyan/10 text-electricCyan text-xs font-mono mb-3">
+                <i class="fa-solid fa-code"></i> Live Frontend Architecture Showcase
+            </div>
+            <h2 className="text-3xl font-extrabold text-white">Interactive Clean Code Sandbox</h2>
+            <p className="text-slate-400 text-sm mt-1 font-sans">
+                Explore production-grade frontend patterns, state management logic, and AWS cloud asset integrations used in my daily frontend architecture workflows.
+            </p>
+        </div>
+
+        <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+            <!-- Sandbox Header Tabs -->
+            <div class="bg-carbon px-4 py-3 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center space-x-2 font-mono text-xs">
+                    <span class="text-slate-400">active_snippet:</span>
+                    <span id="activeSnippetLabel" class="text-electricCyan font-bold">useStreamState.ts</span>
+                </div>
+
+                <div class="flex space-x-2 font-mono text-xs">
+                    <button onclick="switchSandboxTab('hook')" id="tabBtnHook" class="px-3 py-1.5 rounded-lg bg-electricCyan text-indigoDark font-bold transition-all">
+                        1. Custom React Hook
+                    </button>
+                    <button onclick="switchSandboxTab('state')" id="tabBtnState" class="px-3 py-1.5 rounded-lg bg-slateCard text-slate-300 hover:text-white transition-all">
+                        2. UI State Machine
+                    </button>
+                    <button onclick="switchSandboxTab('aws')" id="tabBtnAws" class="px-3 py-1.5 rounded-lg bg-slateCard text-slate-300 hover:text-white transition-all">
+                        3. AWS S3 Presigned Media
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code Editor Body -->
+            <div class="grid lg:grid-cols-12">
+                <!-- Code Area -->
+                <div class="lg:col-span-8 p-6 bg-codeBg font-mono text-xs overflow-x-auto text-slate-200 leading-relaxed border-b lg:border-b-0 lg:border-r border-slate-800">
+                    <pre id="codeDisplay"><code class="language-typescript">
+<span class="token-comment">// Custom React Custom Hook for CecureStream Resilient Buffer Engine</span>
+<span class="token-keyword">import</span> { useState, useEffect } <span class="token-keyword">from</span> <span class="token-string">'react'</span>;
+
+<span class="token-keyword">export interface</span> <span class="token-type">StreamBufferState</span> {
+  streamId: <span class="token-type">string</span>;
+  bitrate: <span class="token-type">number</span>;
+  bufferedPercent: <span class="token-type">number</span>;
+  status: <span class="token-string">'IDLE'</span> | <span class="token-string">'BUFFERING'</span> | <span class="token-string">'PLAYING'</span> | <span class="token-string">'ERROR'</span>;
+}
+
+<span class="token-keyword">export function</span> <span class="token-func">useStreamBufferEngine</span>(streamId: <span class="token-type">string</span>) {
+  <span class="token-keyword">const</span> [state, setState] = <span class="token-func">useState</span>&lt;<span class="token-type">StreamBufferState</span>&gt;({
+    streamId,
+    bitrate: 1080,
+    bufferedPercent: 0,
+    status: <span class="token-string">'IDLE'</span>
+  });
+
+  <span class="token-func">useEffect</span>(() =&gt; {
+    <span class="token-keyword">let</span> timer = <span class="token-func">setInterval</span>(() =&gt; {
+      <span class="token-func">setState</span>(prev =&gt; ({
+        ...prev,
+        status: <span class="token-string">'PLAYING'</span>,
+        bufferedPercent: Math.<span class="token-func">min</span>(100, prev.bufferedPercent + 25)
+      }));
+    }, 400);
+
+    <span class="token-keyword">return</span> () =&gt; <span class="token-func">clearInterval</span>(timer);
+  }, [streamId]);
+
+  <span class="token-keyword">return</span> state;
+}
+                    </code></pre>
+                </div>
+
+                <!-- Live Simulation Output Panel -->
+                <div class="lg:col-span-4 p-6 bg-carbon/80 flex flex-col justify-between font-mono text-xs">
+                    <div>
+                        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
+                            <span class="text-slate-400 font-bold uppercase text-[11px]">Component Sandbox Test</span>
+                            <span class="flex items-center text-emeraldAccent gap-1 text-[10px]">
+                                <span class="w-2 h-2 rounded-full bg-emeraldAccent animate-ping"></span> Live Runtime
+                            </span>
+                        </div>
+
+                        <!-- Live Output Container -->
+                        <div id="sandboxOutput" class="space-y-3">
+                            <div class="p-3 rounded-lg bg-indigoDark border border-slate-800">
+                                <span class="text-slate-400 block text-[10px]">Active Stream ID:</span>
+                                <span class="text-electricCyan font-bold text-sm">cecurestream_video_1092</span>
+                            </div>
+
+                            <div class="p-3 rounded-lg bg-indigoDark border border-slate-800 space-y-1">
+                                <div class="flex justify-between text-slate-300">
+                                    <span>Buffering Progress:</span>
+                                    <span id="bufferProgressText" class="text-emeraldAccent font-bold">100%</span>
+                                </div>
+                                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                    <div id="bufferProgressBar" class="bg-gradient-to-r from-electricCyan to-emeraldAccent h-2 rounded-full w-full transition-all duration-300"></div>
+                                </div>
+                            </div>
+
+                            <div class="p-3 rounded-lg bg-indigoDark border border-slate-800">
+                                <span class="text-slate-400 block text-[10px]">Playback Engine Status:</span>
+                                <span id="playbackStatusText" class="text-emeraldAccent font-bold">STATUS_PLAYING_60FPS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-800 flex justify-between items-center text-[10px] text-slate-500">
+                        <span>Framework: React + TypeScript</span>
+                        <button onclick="runSimulation()" class="bg-slateCard hover:bg-slate-700 text-electricCyan px-3 py-1.5 rounded border border-slate-700 font-bold transition-all">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> Re-Run Sandbox
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS GRID SECTION -->
+    <section id="projects" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emeraldAccent/30 bg-emeraldAccent/10 text-emeraldAccent text-xs font-mono mb-3">
+                    <i class="fa-solid fa-layer-group"></i> Flagship Works & CIL Platforms
+                </div>
+                <h2 className="text-3xl font-extrabold text-white">Software & Cloud Applications</h2>
+                <p class="text-slate-400 text-sm mt-1 font-sans">
+                    Detailed breakdown of platforms, enterprise client apps, and web products I have architected and built.
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex p-1 rounded-xl glass-panel text-xs font-mono">
+                <button onclick="filterProjects('all')" id="btnFilterAll" class="px-4 py-2 rounded-lg bg-electricCyan text-indigoDark font-extrabold transition-all">
+                    All (8)
+                </button>
+                <button onclick="filterProjects('cil')" id="btnFilterCil" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all">
+                    CecureIntel (5)
+                </button>
+                <button onclick="filterProjects('web-apps')" id="btnFilterWeb" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all">
+                    Full-Stack Apps (3)
+                </button>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsGrid">
+            
+            <!-- Project 1: CecureStream -->
+            <div class="project-card glass-panel glass-panel-hover rounded-2xl overflow-hidden flex flex-col justify-between transition-all" data-category="cil">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emeraldAccent/10 text-emeraldAccent border border-emeraldAccent/30">
+                            Live Production
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-mono">CecureIntel Product</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white mb-1">CecureStream</h3>
+                    <p class="text-xs font-mono text-electricCyan mb-3">Enterprise Video & Streaming Web Application</p>
+
+                    <p class="text-slate-300 text-xs leading-relaxed mb-4 line-clamp-3">
+                        Interactive media streaming web application built with React/Next.js, video player integration, dynamic buffer engine, and AWS CloudFront edge delivery optimization.
+                    </p>
+
+                    <div class="flex flex-wrap gap-1.5 mb-4 font-mono text-[10px]">
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">React.js</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Next.js</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">TypeScript</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-amber-300 border border-amber-500/30">AWS S3/CloudFront</span>
+                    </div>
+                </div>
+
+                <div class="px-6 py-4 bg-carbon/60 border-t border-slate-800 flex justify-between items-center text-xs font-mono">
+                    <button onclick="openProjectModal('cecurestream')" class="text-electricCyan hover:underline font-bold flex items-center gap-1">
+                        <span>Architecture Deep-Dive</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                    <a href="https://cecureintel.com/" target="_blank" class="text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 2: CIL Academy Platform -->
+            <div class="project-card glass-panel glass-panel-hover rounded-2xl overflow-hidden flex flex-col justify-between transition-all" data-category="cil">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emeraldAccent/10 text-emeraldAccent border border-emeraldAccent/30">
+                            Live Production
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-mono">LMS & Student Portal</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white mb-1">CIL Academy Platform</h3>
+                    <p class="text-xs font-mono text-electricCyan mb-3">Interactive Learning & Certification Portal</p>
+
+                    <p class="text-slate-300 text-xs leading-relaxed mb-4 line-clamp-3">
+                        Learning management platform featuring student enrollment dashboard, course progress tracking, interactive quiz engines, and automated certificate generation.
+                    </p>
+
+                    <div class="flex flex-wrap gap-1.5 mb-4 font-mono text-[10px]">
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">React.js</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">TypeScript</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Node.js</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">PostgreSQL</span>
+                    </div>
+                </div>
+
+                <div class="px-6 py-4 bg-carbon/60 border-t border-slate-800 flex justify-between items-center text-xs font-mono">
+                    <button onclick="openProjectModal('cil-academy')" class="text-electricCyan hover:underline font-bold flex items-center gap-1">
+                        <span>Architecture Deep-Dive</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                    <a href="https://cecureintel.com/" target="_blank" class="text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 3: PlayShaka -->
+            <div class="project-card glass-panel glass-panel-hover rounded-2xl overflow-hidden flex flex-col justify-between transition-all" data-category="cil">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emeraldAccent/10 text-emeraldAccent border border-emeraldAccent/30">
+                            Live Production
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-mono">Gaming & Rewards</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white mb-1">PlayShaka</h3>
+                    <p class="text-xs font-mono text-electricCyan mb-3">Dynamic Gamification & User Dashboard Engine</p>
+
+                    <p class="text-slate-300 text-xs leading-relaxed mb-4 line-clamp-3">
+                        Consumer engagement web application featuring real-time game leaderboards, WebSocket state sync, and smooth 60fps DOM animation performance.
+                    </p>
+
+                    <div class="flex flex-wrap gap-1.5 mb-4 font-mono text-[10px]">
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">React.js</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">JavaScript ES6+</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Tailwind CSS</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">WebSockets</span>
+                    </div>
+                </div>
+
+                <div class="px-6 py-4 bg-carbon/60 border-t border-slate-800 flex justify-between items-center text-xs font-mono">
+                    <button onclick="openProjectModal('playshaka')" class="text-electricCyan hover:underline font-bold flex items-center gap-1">
+                        <span>Architecture Deep-Dive</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                    <a href="https://cecureintel.com/" target="_blank" class="text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 4: Democratic Tools (Pending Deployment Tag) -->
+            <div class="project-card glass-panel glass-panel-hover rounded-2xl overflow-hidden flex flex-col justify-between transition-all" data-category="cil">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                            <i class="fa-solid fa-clock mr-1"></i> Pending Deployment
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-mono">Civic Engagement Suite</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white mb-1">Democratic Tools</h3>
+                    <p class="text-xs font-mono text-electricCyan mb-3">Civic Voting & Transparency Audit Platform</p>
+
+                    <p class="text-slate-300 text-xs leading-relaxed mb-4 line-clamp-3">
+                        Civic toolsuite designed for public transparency, feedback collection, and voter verification. Currently undergoing pre-deployment security testing.
+                    </p>
+
+                    <div class="flex flex-wrap gap-1.5 mb-4 font-mono text-[10px]">
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Next.js</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">TypeScript</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Go (Golang)</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-amber-300 border border-amber-500/30">AWS Elastic Beanstalk</span>
+                    </div>
+                </div>
+
+                <div class="px-6 py-4 bg-carbon/60 border-t border-slate-800 flex justify-between items-center text-xs font-mono">
+                    <button onclick="openProjectModal('democratic-tools')" class="text-electricCyan hover:underline font-bold flex items-center gap-1">
+                        <span>Architecture Deep-Dive</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                    <span class="text-slate-500 text-[10px]">Staging Environment</span>
+                </div>
+            </div>
+
+            <!-- Project 5: Kelmerge -->
+            <div class="project-card glass-panel glass-panel-hover rounded-2xl overflow-hidden flex flex-col justify-between transition-all" data-category="cil">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emeraldAccent/10 text-emeraldAccent border border-emeraldAccent/30">
+                            Live Production
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-mono">Data Integration Tool</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white mb-1">Kelmerge</h3>
+                    <p class="text-xs font-mono text-electricCyan mb-3">Data Aggregation & Pipeline Utility Interface</p>
+
+                    <p class="text-slate-300 text-xs leading-relaxed mb-4 line-clamp-3">
+                        Enterprise developer utility automating multi-source data merging, CSV/JSON schema conversions, and server synchronization logging.
+                    </p>
+
+                    <div class="flex flex-wrap gap-1.5 mb-4 font-mono text-[10px]">
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Node.js</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Express</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Linode VPS</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Caddy Server</span>
+                    </div>
+                </div>
+
+                <div class="px-6 py-4 bg-carbon/60 border-t border-slate-800 flex justify-between items-center text-xs font-mono">
+                    <button onclick="openProjectModal('kelmerge')" class="text-electricCyan hover:underline font-bold flex items-center gap-1">
+                        <span>Architecture Deep-Dive</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                    <a href="https://cecureintel.com/" target="_blank" class="text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 6: Where WeAliMeet -->
+            <div class="project-card glass-panel glass-panel-hover rounded-2xl overflow-hidden flex flex-col justify-between transition-all" data-category="web-apps">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emeraldAccent/10 text-emeraldAccent border border-emeraldAccent/30">
+                            Live Production
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-mono">Social & Dating App</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white mb-1">Where WeAliMeet</h3>
+                    <p class="text-xs font-mono text-electricCyan mb-3">Social Matchmaking & Dating Platform UI</p>
+
+                    <p class="text-slate-300 text-xs leading-relaxed mb-4 line-clamp-3">
+                        Managed end-to-end frontend architecture, Nuxt.js SSR implementation for SEO optimization, continuous deployment on Linux Ubuntu servers.
+                    </p>
+
+                    <div class="flex flex-wrap gap-1.5 mb-4 font-mono text-[10px]">
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Vue.js</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Nuxt.js SSR</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">SCSS</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Linux Ubuntu</span>
+                    </div>
+                </div>
+
+                <div class="px-6 py-4 bg-carbon/60 border-t border-slate-800 flex justify-between items-center text-xs font-mono">
+                    <button onclick="openProjectModal('where-wealimeet')" class="text-electricCyan hover:underline font-bold flex items-center gap-1">
+                        <span>Architecture Deep-Dive</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                    <span class="text-slate-500 text-[10px]">RITS Client Project</span>
+                </div>
+            </div>
+
+            <!-- Project 7: Flirtz -->
+            <div class="project-card glass-panel glass-panel-hover rounded-2xl overflow-hidden flex flex-col justify-between transition-all" data-category="web-apps">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emeraldAccent/10 text-emeraldAccent border border-emeraldAccent/30">
+                            Live Production
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-mono">Full-Stack Application</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white mb-1">Flirtz Web Application</h3>
+                    <p class="text-xs font-mono text-electricCyan mb-3">Full-Stack Web App & Database Architecture</p>
+
+                    <p class="text-slate-300 text-xs leading-relaxed mb-4 line-clamp-3">
+                        Full-stack web application featuring dynamic layout rendering, optimized relational database queries, automated backup cron jobs, and custom deployment scripts.
+                    </p>
+
+                    <div class="flex flex-wrap gap-1.5 mb-4 font-mono text-[10px]">
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">PHP OOP</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">JavaScript</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">MySQL</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Linode VPS</span>
+                    </div>
+                </div>
+
+                <div class="px-6 py-4 bg-carbon/60 border-t border-slate-800 flex justify-between items-center text-xs font-mono">
+                    <button onclick="openProjectModal('flirtz')" class="text-electricCyan hover:underline font-bold flex items-center gap-1">
+                        <span>Architecture Deep-Dive</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                    <span class="text-slate-500 text-[10px]">Full-Stack Build</span>
+                </div>
+            </div>
+
+            <!-- Project 8: SchoolPay Platform -->
+            <div class="project-card glass-panel glass-panel-hover rounded-2xl overflow-hidden flex flex-col justify-between transition-all" data-category="web-apps">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emeraldAccent/10 text-emeraldAccent border border-emeraldAccent/30">
+                            Live Production
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-mono">EdTech Payment Portal</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white mb-1">SchoolPay Platform</h3>
+                    <p class="text-xs font-mono text-electricCyan mb-3">EdTech Tuition & Invoice Payment UI</p>
+
+                    <p class="text-slate-300 text-xs leading-relaxed mb-4 line-clamp-3">
+                        Client-side interface components, secure tuition payment workflows, client input validation schemas, and real-time transaction status indicators.
+                    </p>
+
+                    <div class="flex flex-wrap gap-1.5 mb-4 font-mono text-[10px]">
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">React.js</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">TypeScript</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-slate-300 border border-slate-800">Tailwind CSS</span>
+                        <span class="px-2 py-0.5 rounded bg-indigoDark text-amber-300 border border-amber-500/30">Payment Webhooks</span>
+                    </div>
+                </div>
+
+                <div class="px-6 py-4 bg-carbon/60 border-t border-slate-800 flex justify-between items-center text-xs font-mono">
+                    <button onclick="openProjectModal('schoolpay')" class="text-electricCyan hover:underline font-bold flex items-center gap-1">
+                        <span>Architecture Deep-Dive</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                    <span class="text-slate-500 text-[10px]">EdTech Platform</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TECHNICAL SKILLS RADAR / MATRIX -->
+    <section id="skills" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-electricCyan/30 bg-electricCyan/10 text-electricCyan text-xs font-mono mb-3">
+                <i class="fa-solid fa-microchip"></i> Core Competencies
+            </div>
+            <h2 className="text-3xl font-extrabold text-white">Technical Architecture & Stack</h2>
+            <p class="text-slate-400 text-sm mt-1 font-sans">
+                A comprehensive matrix of my frontend specialization, cloud architecture tools, and full-stack capabilities.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 font-mono text-xs">
+            
+            <!-- Category 1: Frontend -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center space-x-3 pb-3 border-b border-slate-800">
+                    <div class="w-10 h-10 rounded-xl bg-electricCyan/20 border border-electricCyan/40 flex items-center justify-center text-electricCyan text-lg">
+                        <i class="fa-brands fa-react"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm">Frontend Engineering</h3>
+                        <span class="text-[10px] text-slate-400">UI Architecture & State</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-2 text-slate-300">
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>JavaScript (ES6+) / TypeScript</span>
+                        <span class="text-emeraldAccent font-bold">Expert</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>React.js / Next.js (SSR)</span>
+                        <span class="text-emeraldAccent font-bold">Expert</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>Vue.js / Nuxt.js</span>
+                        <span class="text-electricCyan font-bold">Advanced</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>Tailwind CSS / SCSS / MUI</span>
+                        <span class="text-emeraldAccent font-bold">Expert</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>Redux Toolkit / React Query</span>
+                        <span class="text-emeraldAccent font-bold">Advanced</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Category 2: Cloud & Backend -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center space-x-3 pb-3 border-b border-slate-800">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-lg">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm">Cloud & Backend</h3>
+                        <span class="text-[10px] text-slate-400">AWS SAA-C03 & Node</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-2 text-slate-300">
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>AWS (S3, CloudFront, EC2)</span>
+                        <span class="text-amber-400 font-bold">SAA-C03</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>Node.js / Express</span>
+                        <span class="text-electricCyan font-bold">Advanced</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>Golang (Echo) / PHP</span>
+                        <span class="text-slate-400 font-bold">Proficient</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>PostgreSQL / MySQL</span>
+                        <span class="text-electricCyan font-bold">Advanced</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>Linode VPS / Caddy Proxy</span>
+                        <span class="text-emeraldAccent font-bold">Advanced</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Category 3: Tools & Process -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center space-x-3 pb-3 border-b border-slate-800">
+                    <div class="w-10 h-10 rounded-xl bg-emeraldAccent/20 border border-emeraldAccent/40 flex items-center justify-center text-emeraldAccent text-lg">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm">Tools & Workflows</h3>
+                        <span class="text-[10px] text-slate-400">CI/CD & Team Lead</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-2 text-slate-300">
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>Git / GitHub Actions CI/CD</span>
+                        <span class="text-emeraldAccent font-bold">Expert</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>Vite / Webpack Bundling</span>
+                        <span class="text-emeraldAccent font-bold">Advanced</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>Jira / Agile Sprint Lead</span>
+                        <span class="text-emeraldAccent font-bold">Lead</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>Python (PCEP Scripting)</span>
+                        <span class="text-electricCyan font-bold">Certified</span>
+                    </li>
+                    <li class="flex justify-between p-2 rounded bg-indigoDark border border-slate-800">
+                        <span>REST APIs / JSON Schemas</span>
+                        <span class="text-emeraldAccent font-bold">Expert</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CAREER EVOLUTION TIMELINE -->
+    <section id="experience" class="py-20 px-4 sm:px-8 max-w-5xl mx-auto border-t border-slate-800/60">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emeraldAccent/30 bg-emeraldAccent/10 text-emeraldAccent text-xs font-mono mb-3">
+                <i class="fa-solid fa-briefcase"></i> Career Progress
+            </div>
+            <h2 className="text-3xl font-extrabold text-white">Work Experience</h2>
+            <p class="text-slate-400 text-sm mt-1 font-sans">
+                My professional timeline progressing from Software Developer to Technical Lead & Senior Frontend Specialist.
+            </p>
+        </div>
+
+        <div class="relative border-l-2 border-slate-800 pl-6 sm:pl-8 ml-2 sm:ml-4 space-y-10">
+            
+            <!-- Experience Item 1 -->
+            <div class="relative group">
+                <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-electricCyan border-4 border-indigoDark"></div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-electricCyan/50 transition-all">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                        <h3 class="text-lg font-bold text-white">Technical Lead / Senior Software Developer</h3>
+                        <span class="text-xs font-mono font-semibold text-electricCyan">May 2025 – Present</span>
+                    </div>
+
+                    <div class="flex items-center space-x-2 text-xs text-slate-400 mb-4 font-mono">
+                        <span class="text-emeraldAccent font-bold">CecureIntel</span>
+                        <span>•</span>
+                        <span>Lagos, Nigeria</span>
+                    </div>
+
+                    <ul class="space-y-2 text-xs text-slate-300 leading-relaxed font-sans">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-electricCyan mt-0.5">▸</span>
+                            <span>Promoted to spearhead the technical direction of the frontend engineering division, managing team deliverables, sprint schedules, and Jira tracking systems.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-electricCyan mt-0.5">▸</span>
+                            <span>Architect intuitive, responsive, and performance-optimized user interfaces utilizing React.js, Next.js, and TypeScript across key platforms (CecureStream, CIL Academy, PlayShaka, Democratic Tools).</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-electricCyan mt-0.5">▸</span>
+                            <span>Oversee the design and consumption of secure server-side REST APIs built on Node.js/Express and manage cloud infrastructure deployments on AWS and Azure.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Experience Item 2 -->
+            <div class="relative group">
+                <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-slateCard border-4 border-indigoDark"></div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                        <h3 class="text-lg font-bold text-white">Software Developer</h3>
+                        <span class="text-xs font-mono font-semibold text-slate-400">Jan 2022 – May 2025</span>
+                    </div>
+
+                    <div class="flex items-center space-x-2 text-xs text-slate-400 mb-4 font-mono">
+                        <span class="text-emeraldAccent font-bold">CecureIntel</span>
+                        <span>•</span>
+                        <span>Lagos, Nigeria</span>
+                    </div>
+
+                    <ul class="space-y-2 text-xs text-slate-300 leading-relaxed font-sans">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-slate-500 mt-0.5">▸</span>
+                            <span>Collaborated closely with product design teams to build reusable, maintainable frontend UI code following modern JavaScript/TypeScript best practices.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-slate-500 mt-0.5">▸</span>
+                            <span>Optimized web applications against common OWASP security vulnerabilities and enforced performance benchmarks across client platforms.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Experience Item 3 -->
+            <div class="relative group">
+                <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-slateCard border-4 border-indigoDark"></div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                        <h3 class="text-lg font-bold text-white">Software Engineer</h3>
+                        <span class="text-xs font-mono font-semibold text-slate-400">Jun 2021 – Jan 2022</span>
+                    </div>
+
+                    <div class="flex items-center space-x-2 text-xs text-slate-400 mb-4 font-mono">
+                        <span class="text-emeraldAccent font-bold">RITS</span>
+                        <span>•</span>
+                        <span>Lagos, Nigeria</span>
+                    </div>
+
+                    <ul class="space-y-2 text-xs text-slate-300 leading-relaxed font-sans">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-slate-500 mt-0.5">▸</span>
+                            <span>Owned frontend development lifecycle for client web applications using JavaScript, Vue.js, Nuxt.js, and SCSS.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-slate-500 mt-0.5">▸</span>
+                            <span>Implemented Nuxt.js Server-Side Rendering (SSR) to maximize search engine optimization (SEO) and dynamic metadata tagging.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-slate-500 mt-0.5">▸</span>
+                            <span>Configured Caddy web servers and maintained high application availability on Linode VPS hosting infrastructure.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Experience Item 4 -->
+            <div class="relative group">
+                <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-slateCard border-4 border-indigoDark"></div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                        <h3 class="text-lg font-bold text-white">Software Developer</h3>
+                        <span class="text-xs font-mono font-semibold text-slate-400">Jan 2020 – Mar 2021</span>
+                    </div>
+
+                    <div class="flex items-center space-x-2 text-xs text-slate-400 mb-4 font-mono">
+                        <span class="text-emeraldAccent font-bold">Wootlab Innovation Limited</span>
+                        <span>•</span>
+                        <span>Lagos, Nigeria</span>
+                    </div>
+
+                    <ul class="space-y-2 text-xs text-slate-300 leading-relaxed font-sans">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-slate-500 mt-0.5">▸</span>
+                            <span>Developed enterprise portals using PHP OOP and Yii 2 framework while managing MySQL databases.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS GRID -->
+    <section id="certifications" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-mono mb-3">
+                <i class="fa-solid fa-certificate"></i> Validated Credentials
+            </div>
+            <h2 className="text-3xl font-extrabold text-white">Certifications & Credentials</h2>
+            <p class="text-slate-400 text-sm mt-1 font-sans">
+                Industry certifications validating cloud architecture, JavaScript programming, and software engineering prowess.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 font-mono text-xs">
+            
+            <!-- Cert 1: SAA-C03 (FEATURED) -->
+            <div class="glass-panel p-6 rounded-2xl border border-amber-500/60 ring-1 ring-amber-500/30 bg-gradient-to-b from-amber-500/10 to-carbon flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/40 inline-block mb-3">
+                        NEWLY PASSED EXAM ⭐
+                    </span>
+                    <h3 class="text-base font-bold text-white mb-1">AWS Certified Solutions Architect – Associate</h3>
+                    <p class="text-slate-400 text-[11px] mb-4">Validation ID: SAA-C03 • Amazon Web Services</p>
+                </div>
+                <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-amber-400 font-bold">
+                    <span>AWS Cloud Architectural</span>
+                    <i class="fa-solid fa-square-check text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Cert 2: AWS Practitioner -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-400 bg-indigoDark px-2 py-0.5 rounded border border-slate-800 inline-block mb-3">
+                        AWS Cloud Standard
+                    </span>
+                    <h3 class="text-base font-bold text-white mb-1">AWS Certified Cloud Practitioner</h3>
+                    <p class="text-slate-400 text-[11px] mb-4">CLF Certification • Amazon Web Services</p>
+                </div>
+                <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-electricCyan font-bold">
+                    <span>AWS Infrastructure</span>
+                    <i class="fa-solid fa-square-check text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Cert 3: JSE JavaScript -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-400 bg-indigoDark px-2 py-0.5 rounded border border-slate-800 inline-block mb-3">
+                        Programming Certification
+                    </span>
+                    <h3 class="text-base font-bold text-white mb-1">JSE Certified Entry-Level JavaScript Programmer</h3>
+                    <p class="text-slate-400 text-[11px] mb-4">JSE-40-01 • JS Institute</p>
+                </div>
+                <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-emeraldAccent font-bold">
+                    <span>Core JS Programming</span>
+                    <i class="fa-solid fa-square-check text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Cert 4: PCEP Python -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-400 bg-indigoDark px-2 py-0.5 rounded border border-slate-800 inline-block mb-3">
+                        Scripting & Automation
+                    </span>
+                    <h3 class="text-base font-bold text-white mb-1">PCEP Certified Entry-Level Python Programmer</h3>
+                    <p class="text-slate-400 text-[11px] mb-4">PCEP-30-02 • Python Institute</p>
+                </div>
+                <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-emeraldAccent font-bold">
+                    <span>Python Scripting</span>
+                    <i class="fa-solid fa-square-check text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Cert 5: CIL Academy -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-400 bg-indigoDark px-2 py-0.5 rounded border border-slate-800 inline-block mb-3">
+                        Frontend Engineering
+                    </span>
+                    <h3 class="text-base font-bold text-white mb-1">Frontend Engineering Certification</h3>
+                    <p class="text-slate-400 text-[11px] mb-4">CIL Academy Platform</p>
+                </div>
+                <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-electricCyan font-bold">
+                    <span>UI Engineering</span>
+                    <i class="fa-solid fa-square-check text-sm"></i>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 px-4 sm:px-8 border-t border-slate-800/80 bg-carbon/50 text-xs font-mono text-slate-400">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <span class="text-white font-bold text-base block font-sans">Yvonne Onuorah</span>
+                <span class="text-electricCyan text-xs">Technical Lead | Senior Software Developer | AWS SAA-C03</span>
+                <p class="text-slate-500 text-[11px] mt-1">Lagos, Nigeria • yvonneonuorah@gmail.com • (234) 810-064-2038</p>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openContactModal()" class="bg-gradient-to-r from-electricCyan to-emeraldAccent text-indigoDark font-extrabold px-5 py-2.5 rounded-xl shadow-lg shadow-electricCyan/20 font-sans">
+                    Get In Touch
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE PROJECT ARCHITECTURE MODAL -->
+    <div id="projectModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-indigoDark/80 backdrop-blur-md">
+        <div class="glass-panel max-w-2xl w-full rounded-2xl border border-slate-800 p-6 relative max-h-[90vh] overflow-y-auto font-sans">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="modalContent">
+                <!-- Dynamic Content Injected Here -->
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+                <button onclick="closeProjectModal()" class="bg-slateCard hover:bg-slate-700 text-white px-5 py-2 rounded-lg text-xs font-mono font-bold">
+                    Close Modal
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT MODAL -->
+    <div id="contactModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-indigoDark/80 backdrop-blur-md">
+        <div class="glass-panel max-w-md w-full rounded-2xl border border-slate-800 p-6 relative font-sans">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="text-xl font-bold text-white mb-1">Contact Yvonne Onuorah</h3>
+            <p class="text-xs text-slate-400 mb-4 font-mono">Senior Software Developer & Frontend Architect</p>
+
+            <form onsubmit="handleContactSubmit(event)" class="space-y-3 text-xs font-mono">
+                <div>
+                    <label class="block text-slate-300 mb-1">Your Name</label>
+                    <input type="text" required class="w-full bg-indigoDark border border-slate-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-electricCyan">
+                </div>
+                <div>
+                    <label class="block text-slate-300 mb-1">Your Email</label>
+                    <input type="email" required class="w-full bg-indigoDark border border-slate-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-electricCyan">
+                </div>
+                <div>
+                    <label class="block text-slate-300 mb-1">Message</label>
+                    <textarea rows="4" required class="w-full bg-indigoDark border border-slate-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-electricCyan"></textarea>
+                </div>
+
+                <div id="contactSuccess" class="hidden p-2.5 rounded bg-emeraldAccent/20 text-emeraldAccent text-[11px] font-bold text-center">
+                    Message sent! I will respond shortly.
+                </div>
+
+                <button type="submit" class="w-full bg-electricCyan text-indigoDark font-extrabold py-3 rounded-lg hover:bg-cyan-400 transition-all font-sans text-xs">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT INTERACTIVE LOGIC -->
+    <script>
+        // Project Detail Data Object
+        const projectDetails = {
+            'cecurestream': {
+                title: 'CecureStream',
+                subtitle: 'Enterprise Video & Media Streaming Platform',
+                category: 'CecureIntel Product',
+                status: 'Live Production',
+                description: 'High-performance interactive video streaming web application designed for low-latency media playback. Built with React, Next.js, video buffer engines, and AWS CloudFront edge delivery.',
+                tech: ['React.js', 'Next.js', 'TypeScript', 'AWS S3', 'AWS CloudFront CDN', 'Node.js'],
+                arch: 'CloudFront Edge CDN -> AWS S3 Origin -> Node.js Buffer Engine API'
+            },
+            'cil-academy': {
+                title: 'CIL Academy Platform / Portal',
+                subtitle: 'Enterprise Learning & Student Certification Portal',
+                category: 'CecureIntel Platform',
+                status: 'Live Production',
+                description: 'Scalable learning management system powering user certifications, coding modules, dynamic quiz evaluation, and certificate generation.',
+                tech: ['React.js', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Azure AD'],
+                arch: 'Azure App Service -> Managed PostgreSQL DB -> Azure Blob Asset Storage'
+            },
+            'playshaka': {
+                title: 'PlayShaka',
+                subtitle: 'Gamification & Rewards Engine Platform',
+                category: 'CecureIntel App',
+                status: 'Live Production',
+                description: 'Interactive gamified web application featuring live leaderboards, real-time WebSocket session sync, and smooth 60fps DOM animation execution.',
+                tech: ['React.js', 'JavaScript ES6+', 'Tailwind CSS', 'WebSockets', 'Node.js'],
+                arch: 'Node.js WebSocket Gateway -> Redis Session Cache -> Elastic Container'
+            },
+            'democratic-tools': {
+                title: 'Democratic Tools',
+                subtitle: 'Civic Voting & Public Transparency Suite',
+                category: 'Civic Tech Platform',
+                status: 'Pending Deployment',
+                description: 'Public audit and civic tool suite designed to enable transparent voter feedback and audit trail generation. Currently undergoing pre-deployment security testing.',
+                tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Go (Golang)', 'AWS Elastic Beanstalk'],
+                arch: 'AWS Elastic Beanstalk -> Aurora PostgreSQL Serverless -> AWS KMS Security'
+            },
+            'kelmerge': {
+                title: 'Kelmerge',
+                subtitle: 'Data Aggregation & Schema Pipeline Utility',
+                category: 'Developer Utility',
+                status: 'Live Production',
+                description: 'Enterprise utility automating CSV/JSON data merging, file schema conversions, and server synchronization logging routines.',
+                tech: ['Node.js', 'Express', 'Linode VPS', 'Caddy Server', 'MySQL'],
+                arch: 'Linode VPS -> Caddy Reverse Proxy -> Node.js Sync Worker'
+            },
+            'where-wealimeet': {
+                title: 'Where WeAliMeet',
+                subtitle: 'Matchmaking & Dating Social Platform',
+                category: 'Web Application',
+                status: 'Live Production',
+                description: 'Managed end-to-end frontend architecture, REST API integrations, and Nuxt.js SSR implementation for maximum search engine optimization.',
+                tech: ['Vue.js', 'Nuxt.js SSR', 'SCSS', 'Linux Ubuntu', 'Git'],
+                arch: 'Nginx Proxy -> Nuxt.js SSR Worker -> MongoDB Node Server'
+            },
+            'flirtz': {
+                title: 'Flirtz Web Application',
+                subtitle: 'Full-Stack Social Platform',
+                category: 'Full-Stack Build',
+                status: 'Live Production',
+                description: 'Full-stack web application featuring dynamic layout design, relational database query optimization, and automated server system backups.',
+                tech: ['PHP OOP', 'JavaScript', 'MySQL', 'SCSS', 'Linode VPS'],
+                arch: 'Linode Linux Host -> Apache Server -> MySQL Master Instance'
+            },
+            'schoolpay': {
+                title: 'SchoolPay Platform',
+                subtitle: 'EdTech Tuition & Invoice Payment UI',
+                category: 'EdTech Portal',
+                status: 'Live Production',
+                description: 'Intuitive tuition payment interface featuring dynamic form schemas, payment webhook callbacks, and responsive client dashboards.',
+                tech: ['React.js', 'TypeScript', 'Tailwind CSS', 'Payment Webhooks'],
+                arch: 'AWS S3 Static Hosting -> AWS API Gateway -> Lambda Functions'
+            }
+        };
+
+        // Code Sandbox Tab Switching Logic
+        const sandboxSnippets = {
+            'hook': `<span class="token-comment">// Custom React Hook for CecureStream Resilient Buffer Engine</span>
+<span class="token-keyword">import</span> { useState, useEffect } <span class="token-keyword">from</span> <span class="token-string">'react'</span>;
+
+<span class="token-keyword">export interface</span> <span class="token-type">StreamBufferState</span> {
+  streamId: <span class="token-type">string</span>;
+  bitrate: <span class="token-type">number</span>;
+  bufferedPercent: <span class="token-type">number</span>;
+  status: <span class="token-string">'IDLE'</span> | <span class="token-string">'BUFFERING'</span> | <span class="token-string">'PLAYING'</span> | <span class="token-string">'ERROR'</span>;
+}
+
+<span class="token-keyword">export function</span> <span class="token-func">useStreamBufferEngine</span>(streamId: <span class="token-type">string</span>) {
+  <span class="token-keyword">const</span> [state, setState] = <span class="token-func">useState</span>&lt;<span class="token-type">StreamBufferState</span>&gt;({
+    streamId,
+    bitrate: 1080,
+    bufferedPercent: 0,
+    status: <span class="token-string">'IDLE'</span>
+  });
+
+  <span class="token-func">useEffect</span>(() =&gt; {
+    <span class="token-keyword">let</span> timer = <span class="token-func">setInterval</span>(() =&gt; {
+      <span class="token-func">setState</span>(prev =&gt; ({
+        ...prev,
+        status: <span class="token-string">'PLAYING'</span>,
+        bufferedPercent: Math.<span class="token-func">min</span>(100, prev.bufferedPercent + 25)
+      }));
+    }, 400);
+
+    <span class="token-keyword">return</span> () =&gt; <span class="token-func">clearInterval</span>(timer);
+  }, [streamId]);
+
+  <span class="token-keyword">return</span> state;
+}`,
+
+            'state': `<span class="token-comment">// CIL Academy Quiz & Student Progress UI State Machine Pattern</span>
+<span class="token-keyword">type</span> <span class="token-type">QuizEvent</span> = 
+  | { type: <span class="token-string">'START_QUIZ'</span> }
+  | { type: <span class="token-string">'SUBMIT_ANSWER'</span>; payload: <span class="token-type">number</span> }
+  | { type: <span class="token-string">'FINISH_QUIZ'</span> };
+
+<span class="token-keyword">export function</span> <span class="token-func">quizReducer</span>(state: <span class="token-type">QuizState</span>, event: <span class="token-type">QuizEvent</span>): <span class="token-type">QuizState</span> {
+  <span class="token-keyword">switch</span> (event.type) {
+    <span class="token-keyword">case</span> <span class="token-string">'START_QUIZ'</span>:
+      <span class="token-keyword">return</span> { ...state, status: <span class="token-string">'IN_PROGRESS'</span>, score: 0 };
+    <span class="token-keyword">case</span> <span class="token-string">'SUBMIT_ANSWER'</span>:
+      <span class="token-keyword">return</span> { ...state, score: state.score + event.payload };
+    <span class="token-keyword">case</span> <span class="token-string">'FINISH_QUIZ'</span>:
+      <span class="token-keyword">return</span> { ...state, status: <span class="token-string">'COMPLETED'</span> };
+    <span class="token-keyword">default</span>:
+      <span class="token-keyword">return</span> state;
+  }
+}`,
+
+            'aws': `<span class="token-comment">// AWS S3 Signed Presigned URL Generator for Secure Streaming Assets</span>
+<span class="token-keyword">import</span> { S3Client, GetObjectCommand } <span class="token-keyword">from</span> <span class="token-string">"@aws-sdk/client-s3"</span>;
+<span class="token-keyword">import</span> { getSignedUrl } <span class="token-keyword">from</span> <span class="token-string">"@aws-sdk/s3-request-presigner"</span>;
+
+<span class="token-keyword">const</span> <span class="token-var">s3Client</span> = <span class="token-keyword">new</span> <span class="token-type">S3Client</span>({ region: <span class="token-string">"us-east-1"</span> });
+
+<span class="token-keyword">export async function</span> <span class="token-func">getSecureMediaStreamUrl</span>(mediaKey: <span class="token-type">string</span>) {
+  <span class="token-keyword">const</span> <span class="token-var">command</span> = <span class="token-keyword">new</span> <span class="token-type">GetObjectCommand</span>({
+    Bucket: <span class="token-string">"cecurestream-media-assets"</span>,
+    Key: mediaKey,
+  });
+
+  <span class="token-comment">// Presigned URL expires in 15 mins (SAA-C03 Best Practice)</span>
+  <span class="token-keyword">return await</span> <span class="token-func">getSignedUrl</span>(<span class="token-var">s3Client</span>, <span class="token-var">command</span>, { expiresIn: 900 });
+}`
+        };
+
+        function switchSandboxTab(tabKey) {
+            const labelMap = {
+                'hook': 'useStreamState.ts',
+                'state': 'quizStateMachine.ts',
+                'aws': 'awsMediaS3Presigner.ts'
+            };
+
+            document.getElementById('activeSnippetLabel').innerText = labelMap[tabKey];
+            document.getElementById('codeDisplay').innerHTML = sandboxSnippets[tabKey];
+
+            // Update Tab Highlight
+            ['Hook', 'State', 'Aws'].forEach(tab => {
+                const btn = document.getElementById('tabBtn' + tab);
+                if (tab.toLowerCase() === tabKey) {
+                    btn.className = 'px-3 py-1.5 rounded-lg bg-electricCyan text-indigoDark font-bold transition-all';
+                } else {
+                    btn.className = 'px-3 py-1.5 rounded-lg bg-slateCard text-slate-300 hover:text-white transition-all';
+                }
+            });
+
+            runSimulation();
+        }
+
+        function runSimulation() {
+            const bar = document.getElementById('bufferProgressBar');
+            const text = document.getElementById('bufferProgressText');
+            const status = document.getElementById('playbackStatusText');
+
+            bar.style.width = '0%';
+            text.innerText = '0%';
+            status.innerText = 'INITIALIZING...';
+
+            setTimeout(() => {
+                bar.style.width = '50%';
+                text.innerText = '50%';
+                status.innerText = 'BUFFERING_PRESET...';
+            }, 250);
+
+            setTimeout(() => {
+                bar.style.width = '100%';
+                text.innerText = '100%';
+                status.innerText = 'STATUS_PLAYING_60FPS';
+            }, 600);
+        }
+
+        // Project Filtering
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update Active Filter Btn
+            ['All', 'Cil', 'Web'].forEach(btnKey => {
+                const btn = document.getElementById('btnFilter' + btnKey);
+                if ((btnKey === 'All' && category === 'all') || 
+                    (btnKey === 'Cil' && category === 'cil') || 
+                    (btnKey === 'Web' && category === 'web-apps')) {
+                    btn.className = 'px-4 py-2 rounded-lg bg-electricCyan text-indigoDark font-extrabold transition-all';
+                } else {
+                    btn.className = 'px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all';
+                }
+            });
+        }
+
+        // Modal Logic
+        function openProjectModal(projectId) {
+            const proj = projectDetails[projectId];
+            if (!proj) return;
+
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="text-xs font-mono font-bold uppercase text-electricCyan">${proj.category}</span>
+                    <span class="text-slate-600">•</span>
+                    <span class="text-xs font-mono text-emeraldAccent">${proj.status}</span>
+                </div>
+
+                <h2 class="text-2xl font-extrabold text-white mb-1">${proj.title}</h2>
+                <p class="text-xs font-mono text-amber-400 mb-4">${proj.subtitle}</p>
+
+                <div class="space-y-4 text-xs font-sans">
+                    <div>
+                        <h4 class="font-bold text-white font-mono mb-1">Architecture Overview:</h4>
+                        <p class="text-slate-300 leading-relaxed">${proj.description}</p>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-indigoDark border border-slate-800 font-mono">
+                        <h4 class="font-bold text-amber-400 mb-1">System Pipeline / Topology:</h4>
+                        <p class="text-slate-300 text-[11px]">${proj.arch}</p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-white font-mono mb-2">Technologies Used:</h4>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
+                            ${proj.tech.map(t => `<span class="bg-slateCard text-slate-200 px-2.5 py-1 rounded border border-slate-700">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('projectModal').classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModal').classList.add('hidden');
+        }
+
+        function openContactModal() {
+            document.getElementById('contactModal').classList.remove('hidden');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.add('hidden');
+            document.getElementById('contactSuccess').classList.add('hidden');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            document.getElementById('contactSuccess').classList.remove('hidden');
+            setTimeout(() => {
+                closeContactModal();
+            }, 2000);
+        }
+
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobileNav');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('flex');
+        }
+    </script>
+</body>
+</html>
